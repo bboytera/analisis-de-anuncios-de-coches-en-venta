@@ -20,3 +20,9 @@ El dataset contiene los siguientes campos:
 
   Se encuentran en el archivo `datasets/vehicles_us.csv`
 
+  # Habilidades técnicas
+  - `Pandas`
+  - `Matplotlib`
+  - `Seaborn`
+  
+
