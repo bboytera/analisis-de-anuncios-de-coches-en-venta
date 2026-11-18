@@ -1,0 +1,9 @@
+{
+  "rows": 51525,
+  "selected_types": [
+    "SUV",
+    "truck"
+  ],
+  "selection_rule": "At least 50 listings, sorted by listing count",
+  "caution": "Listings are not completed sales. Associations are not causal effects."
+}

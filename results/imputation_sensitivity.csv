@@ -1,0 +1,4 @@
+column,missing_count,observed_median,completed_median
+model_year,3619,2011.0,2011.0
+odometer,7892,113000.0,115256.0
+cylinders,5260,6.0,6.0

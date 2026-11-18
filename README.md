@@ -1,64 +1,29 @@
-# Análisis de anuncios de coches en venta
-# Introducción
+# Limpieza y análisis de anuncios de vehículos
 
-En **Crankshaft List** cientos de anuncios gratuitos de vehículos se publican en su sitio web cada día. Necesitaremos estudiar los datos recopilados durante los últimos años y determinar qué factores influyen en el precio de un vehículo.
+Proyecto formativo con Python, pandas y Matplotlib.
 
-# Descripción de los datos
-El dataset contiene los siguientes campos:
-- `'price'`      -precio del vehículo
-- `'model_year'` -año del vehículo
-- `'model'`      -modelo del vehículo
-- `'condition'`  -concición en la que se encuentra
-- `'cylinders'`  -cilindraje
-- `'fuel'`       - gasolina, diesel, etc.
-- `'odometer'`   - el millaje del vehículo cuando el anuncio fue publicado
-- `'transmission'` -el tipo de transmisión del vehículo
-- `'paint_color'`  -el color del vehículo
-- `'is_4wd'`     - si el vehículo tiene tracción a las 4 ruedas (tipo Booleano)
-- `'date_posted'`- la fecha en la que el anuncio fue publicado
-- `'days_listed'`- desde la publicación hasta que se elimina
+## Reproducción
 
-  Se encuentran en el archivo `datasets/vehicles_us.csv`
+Python 3.12. Instalar requirements.txt en un entorno virtual. Desde esta carpeta:
 
-  # Habilidades técnicas
-  - `Phyton`
-  - `Pandas`
-  - `Matplotlib`
-  - `Seaborn`
-  # Conclusión General
-  **Preprocesamos los datos:**
+```powershell
+python analysis.py --data https://practicum-content.s3.us-west-1.amazonaws.com/datasets/vehicles_us.csv
+```
 
-- Remplazamos lo valores ausentes usando(la mediana,la moda, usamos el valor más comun en paint_color, Buscamos tambien patrones en los datos agrupandolos o en valores booleanos rellenamos con el opuesto al valor 
+También puede pasarse una ruta CSV local a --data. El archivo datasets_vehicles_us.csv del repositorio es una referencia URL, no el dataset completo. Se requiere acceso al dataset público del proveedor; no se redistribuyen los datos.
 
-- Corregimos los tipos de datos
+El notebook llama al mismo módulo y presenta tablas y gráficos regenerados. Para usar datos locales en él, definir VEHICLES_DATA.
 
-- Agregamos valores adicionales al dataframe como el promedio del millaje, los años del vehiculo desde su pubicacion etc...
+## Correcciones
 
-**Visualizamos los datos:**
+Imputación escalar de cilindros por modelo con respaldo; indicadores de ausentes; color desconocido explícito; sensibilidad de medianas a la imputación; protección frente a división por edad cero; IQR independiente por variable; popularidad calculada por número de anuncios con mínimo de 50.
 
-- Realizamos histogramas estudiando y comparando con valores atipicos y sin valores atipicos de algunos parametros: precio, los años del vehículo cuando el anuncio se colocó, millaje, número de cilindros y la condicion
+results/ contiene tablas de frecuencia, resumen, sensibilidad y figuras. No se afirma que los tipos de mayor precio sean los más populares ni que las asociaciones sean causas del precio. Los anuncios retirados no prueban una venta.
 
-- observamos el periodo de colocación de los anuncios siendo por arriba de 50 dias listados es un tiempo anormalmente alto la mayoria de vehiculos vendidos duran no menos a 50 dias y como de 0 a 20 dias se eliminan rápidamente los anuncios.
+## Pruebas de regresión
 
-- observamos tambien en grafica de dispersion el promedio de precio por tipo de vehiculo siendo el bus con mayor precio promedio
+```powershell
+python -m unittest discover -p "test_*.py" -v
+```
 
-- Tambien obtuvimos los dos tipos más populares: bus y truck
-
-- Y realizamos graficas de dispersion para observar que factores impactaban  más sobre el precio si el precio tenia que ver con el tipo de transmision, color, la edad del vehiculo, millaje o condición,
-
-**LOS FACTORES QUE MAS IMPACTAN EN EL BUS SON:**
-- automatico
-- blanco 
-- 7 a 8 años
-- un millaje de casi 200000 de millaje
-- condicion buena
-
-
-**LOS FACTORES QUE MAS IMPACTAN  EN TRUCK SON:**
-- automatico
-- color negro
-- 6 a 7 años 
-- 150 mil millas 
-- condicion buena
-
-
+Consultar VALIDACION.md para distinguir pruebas con datos reales, sintéticos y límites de integración.
